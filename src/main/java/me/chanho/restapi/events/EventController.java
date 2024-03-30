@@ -29,14 +29,16 @@ public class EventController {
     private final ModelMapper modelMapper;
     private final EventValidator eventValidator;
 
-    @InitBinder("eventDto")
-    public void initBinder(WebDataBinder webDataBinder) {
-        webDataBinder.addValidators(eventValidator);
-    }
+
 
 
     @PostMapping
     public ResponseEntity createEvent(@RequestBody  @Valid EventDto eventDto, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        eventValidator.validate(eventDto, errors);
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }
