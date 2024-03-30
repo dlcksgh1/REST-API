@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,13 @@ public class EventController {
 
     private final EventRepository eventRepository;
     private final ModelMapper modelMapper;
+    private final EventValidator eventValidator;
+
+    @InitBinder("eventDto")
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(eventValidator);
+    }
+
 
     @PostMapping
     public ResponseEntity createEvent(@RequestBody  @Valid EventDto eventDto, Errors errors) {
