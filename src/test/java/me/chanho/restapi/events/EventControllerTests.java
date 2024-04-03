@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.stream.IntStream;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
@@ -26,6 +27,7 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -40,6 +42,9 @@ public class EventControllerTests {
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @Test
     @DisplayName("정상적으로 이벤트를 생성하는 테스트")
@@ -193,5 +198,38 @@ public class EventControllerTests {
                 .andExpect(jsonPath("$[0].objectName").exists())
                 .andExpect(jsonPath("$[0].defaultMessage").exists())
                 .andExpect(jsonPath("$[0].code").exists());
+    }
+
+    @Test
+    @DisplayName("30개의 이벤트를 10개씩 두 번째 페이지 조회하기")
+    public void queryEvents() throws Exception {
+        // Given - 이벤트 30개
+        IntStream.range(0, 30).forEach(this::generateEvent);
+
+        // When - 두 번째 페이지 조회
+        this.mockMvc.perform(get("/api/events")
+                        .param("page", "1") // 1이 두 번째 페이지
+                        .param("size", "10") // 한 페이지 사이즈
+                        .param("sort", "name,DESC") // 이름 역순
+                )
+                // Then
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("page").exists())
+                .andExpect(jsonPath("_embedded.eventList[0]._links.self").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.profile").exists())
+                .andDo(document("query-events"))
+        ;
+    }
+
+
+    private void generateEvent(int index) { // 이벤트 생성하기
+        Event event = Event.builder()
+                .name("event " + index)
+                .description("test index " + index)
+                .build();
+
+        this.eventRepository.save(event);
     }
 }

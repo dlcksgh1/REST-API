@@ -3,6 +3,9 @@ package me.chanho.restapi.events;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
@@ -11,10 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -49,11 +49,18 @@ public class EventController {
         Event newEvent = eventRepository.save(event);
         var selfLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
         URI createUri = selfLinkBuilder.toUri();
-        EntityModel eventResource = EntityModel.of(newEvent);
-        eventResource.add(selfLinkBuilder.withSelfRel());
+        EventResource eventResource = new EventResource(newEvent);
         eventResource.add(linkTo(EventController.class).withRel("query-events"));
         eventResource.add(selfLinkBuilder.withRel("update-event"));
         eventResource.add(Link.of("/docs/index.html#resources-events-create").withRel("profile"));
         return ResponseEntity.created(createUri).body(eventResource);
+    }
+
+    @GetMapping
+    public ResponseEntity queryEvents(Pageable pageable, PagedResourcesAssembler<Event> assembler) {
+        Page<Event> page = this.eventRepository.findAll(pageable);
+        var pageResources = assembler.toModel(page, e -> new EventResource(e));
+        pageResources.add(Link.of("/docs/index.html#resources-events-list").withRel("profile"));
+        return ResponseEntity.ok(pageResources);
     }
 }
