@@ -2,6 +2,7 @@ package me.chanho.restapi.events;
 
 import jakarta.persistence.*;
 import lombok.*;
+import me.chanho.restapi.accounts.Account;
 
 import java.time.LocalDateTime;
 
@@ -27,6 +28,9 @@ public class Event {
     private boolean free;
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
+
+    @ManyToOne
+    private Account manger;
 
     public void update() {
         // Update free
