@@ -1,9 +1,10 @@
 package me.chanho.restapi.events;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 import me.chanho.restapi.accounts.Account;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 

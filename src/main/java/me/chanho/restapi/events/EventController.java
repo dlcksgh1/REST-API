@@ -1,6 +1,5 @@
 package me.chanho.restapi.events;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import me.chanho.restapi.common.ErrorsResource;
 import org.modelmapper.ModelMapper;
@@ -10,13 +9,14 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
+
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
