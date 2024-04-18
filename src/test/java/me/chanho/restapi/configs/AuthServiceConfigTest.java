@@ -38,13 +38,6 @@ public class AuthServiceConfigTest {
         // Given
         String username = "chanho@email.com";
         String password = "chanho";
-        Account account = Account.builder()
-                .email(username)
-                .password(password)
-                .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
-                .build();
-        this.accountService.saveAccount(account);
-
         String clientId = "myApp";
         String clientSecret = "pass";
 
