@@ -4,6 +4,7 @@ package me.chanho.restapi.configs;
 import me.chanho.restapi.accounts.Account;
 import me.chanho.restapi.accounts.AccountRole;
 import me.chanho.restapi.accounts.AccountService;
+import me.chanho.restapi.common.AppProperties;
 import me.chanho.restapi.events.Event;
 import me.chanho.restapi.events.EventRepository;
 import me.chanho.restapi.events.EventStatus;
@@ -43,19 +44,31 @@ public class AppConfig {
             @Autowired
             EventRepository eventRepository;
 
+            @Autowired
+            AppProperties appProperties;
+
             @Override
             public void run(ApplicationArguments args) throws Exception {
-                Account account = Account.builder()
-                        .email("chanho@email.com")
-                        .password("chanho")
+                Account admin = Account.builder()
+                        .email(appProperties.getAdminUsername())
+                        .password(appProperties.getAdminPassword())
                         .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                         .build();
-                accountService.saveAccount(account);
+                accountService.saveAccount(admin);
 
-                IntStream.range(0, 30).forEach(this::generateEvent);
+                Account user = Account.builder()
+                        .email(appProperties.getUserUsername())
+                        .password(appProperties.getUserPassword())
+                        .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
+                        .build();
+                accountService.saveAccount(user);
+
+                IntStream.range(0, 30).forEach(index -> {
+                    generateEvent(index, admin);
+                });
             }
 
-            private Event generateEvent(int index) {
+            private Event generateEvent(int index, Account account) {
                 Event event = Event.builder()
                         .name("event " + index)
                         .description("test index " + index)
@@ -70,6 +83,7 @@ public class AppConfig {
                         .free(false)
                         .offline(true)
                         .eventStatus(EventStatus.DRAFT)
+                        .manger(account)
                         .build();
 
                 return this.eventRepository.save(event);
