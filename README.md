@@ -12,3 +12,9 @@
 - 스프링 시큐리티 OAuth2
 
 ### [블로그 링크](https://velog.io/@cse05091/series/REST-API)
+
+## 스프링 REST Docs 구현
+
+![image](https://github.com/dlcksgh1/REST-API/assets/119422058/81337e06-37e1-4c19-a52d-326b53449ec4)
+
+
