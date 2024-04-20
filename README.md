@@ -18,3 +18,17 @@
 ![image](https://github.com/dlcksgh1/REST-API/assets/119422058/81337e06-37e1-4c19-a52d-326b53449ec4)
 
 
+## 엑세스 토큰발급
+#### Authorization type 을 Basic Auth로 설정하고  client-id, client-secret를 입력
+![image](https://github.com/dlcksgh1/REST-API/assets/119422058/057a79ab-76e1-4c55-97fa-1d833f729bab)
+
+#### Body 에 username,password, grant_type 정보를 입력하여 요청하면 access_type이 bearer 인 access_token 정보를 받을 수있다. 
+![image](https://github.com/dlcksgh1/REST-API/assets/119422058/85fc0eec-ebed-4ef2-b066-d4b13e8bfea3)
+
+## Api root 요청
+
+#### API가 제공하는 resource 정보를 볼 수 있다.
+![image](https://github.com/dlcksgh1/REST-API/assets/119422058/3989d113-d470-4f43-8ff8-e5a15d89c3e2)
+
+#### Event 목록 조회
+
