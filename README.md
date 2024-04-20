@@ -32,3 +32,4 @@
 
 #### Event 목록 조회
 
+![image](https://github.com/dlcksgh1/REST-API/assets/119422058/bacf54c6-d18e-42ae-a3f9-220b990d9603)
