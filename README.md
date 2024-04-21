@@ -139,7 +139,104 @@
 
 ####  로그인후 Event 목록 조회를 하게된다면  Event 생성 링크 제공한다.
 
-추후 추가
+![image](https://github.com/dlcksgh1/REST-API/assets/119422058/3dcf3439-adfc-4eb4-94ea-fa7888c756ac)
+#### 응답 예시
+```json
+{
+    "_embedded": {
+        "eventList": [
+            {
+                "id": 3,
+                "name": "event 0",
+                "description": "test index 0",
+                "beginEnrollmentDateTime": "2024-03-23T14:21:00",
+                "closeEnrollmentDateTime": "2024-03-24T14:21:00",
+                "beginEventDateTime": "2024-03-25T14:21:00",
+                "endEventDateTime": "2024-03-26T14:21:00",
+                "location": "강남역 D2 스타텁 팩토리",
+                "basePrice": 100,
+                "maxPrice": 200,
+                "limitOfEnrollment": 100,
+                "offline": true,
+                "free": false,
+                "eventStatus": "DRAFT",
+                "manger": {
+                    "id": 1,
+                    "email": "chanho@email.com",
+                    "password": "{bcrypt}$2a$10$5RDzJX9og.Sli/SdHoRRwe1b7DySAPNhvbipb/5IYNbbpZSn7O5NK",
+                    "roles": [
+                        "USER",
+                        "ADMIN"
+                    ]
+                },
+                "_links": {
+                    "self": {
+                        "href": "http://localhost:8080/api/events/3"
+                    }
+                }
+            },
+            ...
+            {
+                "id": 10,
+                "name": "event 7",
+                "description": "test index 7",
+                "beginEnrollmentDateTime": "2024-03-23T14:21:00",
+                "closeEnrollmentDateTime": "2024-03-24T14:21:00",
+                "beginEventDateTime": "2024-03-25T14:21:00",
+                "endEventDateTime": "2024-03-26T14:21:00",
+                "location": "강남역 D2 스타텁 팩토리",
+                "basePrice": 100,
+                "maxPrice": 200,
+                "limitOfEnrollment": 100,
+                "offline": true,
+                "free": false,
+                "eventStatus": "DRAFT",
+                "manger": {
+                    "id": 1,
+                    "email": "chanho@email.com",
+                    "password": "{bcrypt}$2a$10$5RDzJX9og.Sli/SdHoRRwe1b7DySAPNhvbipb/5IYNbbpZSn7O5NK",
+                    "roles": [
+                        "USER",
+                        "ADMIN"
+                    ]
+                },
+                "_links": {
+                    "self": {
+                        "href": "http://localhost:8080/api/events/10"
+                    }
+                }
+            }
+            
+        ]
+    },
+    "_links": {
+        "first": {
+            "href": "http://localhost:8080/api/events?page=0&size=20"
+        },
+        "self": {
+            "href": "http://localhost:8080/api/events?page=0&size=20"
+        },
+        "next": {
+            "href": "http://localhost:8080/api/events?page=1&size=20"
+        },
+        "last": {
+            "href": "http://localhost:8080/api/events?page=1&size=20"
+        },
+        "profile": {
+            "href": "/docs/index.html#resources-events-list"
+        },
+        "create-event": {
+            "href": "http://localhost:8080/api/events"
+        }
+    },
+    "page": {
+        "size": 20,
+        "totalElements": 30,
+        "totalPages": 2,
+        "number": 0
+    }
+}
+```
 
 ## Event 생성
 
