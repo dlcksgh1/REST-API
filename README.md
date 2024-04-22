@@ -62,13 +62,7 @@
                 "free": false,
                 "eventStatus": "DRAFT",
                 "manger": {
-                    "id": 1,
-                    "email": "chanho@email.com",
-                    "password": "{bcrypt}$2a$10$KTD714PHVrMvkMDHForzKu12mvQ94/GW0LtWfOGRQjC7Qu92zC.mC",
-                    "roles": [
-                        "USER",
-                        "ADMIN"
-                    ]
+                    "id": 1
                 },
                 "_links": {
                     "self": {
@@ -95,13 +89,7 @@
                 "free": false,
                 "eventStatus": "DRAFT",
                 "manger": {
-                    "id": 1,
-                    "email": "chanho@email.com",
-                    "password": "{bcrypt}$2a$10$KTD714PHVrMvkMDHForzKu12mvQ94/GW0LtWfOGRQjC7Qu92zC.mC",
-                    "roles": [
-                        "USER",
-                        "ADMIN"
-                    ]
+                    "id": 1
                 },
                 "_links": {
                     "self": {
@@ -161,13 +149,7 @@
                 "free": false,
                 "eventStatus": "DRAFT",
                 "manger": {
-                    "id": 1,
-                    "email": "chanho@email.com",
-                    "password": "{bcrypt}$2a$10$5RDzJX9og.Sli/SdHoRRwe1b7DySAPNhvbipb/5IYNbbpZSn7O5NK",
-                    "roles": [
-                        "USER",
-                        "ADMIN"
-                    ]
+                    "id": 1
                 },
                 "_links": {
                     "self": {
@@ -192,13 +174,7 @@
                 "free": false,
                 "eventStatus": "DRAFT",
                 "manger": {
-                    "id": 1,
-                    "email": "chanho@email.com",
-                    "password": "{bcrypt}$2a$10$5RDzJX9og.Sli/SdHoRRwe1b7DySAPNhvbipb/5IYNbbpZSn7O5NK",
-                    "roles": [
-                        "USER",
-                        "ADMIN"
-                    ]
+                    "id": 1
                 },
                 "_links": {
                     "self": {
