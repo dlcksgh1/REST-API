@@ -287,5 +287,6 @@
 
 #### 로그인 했을 때 로그인 사용자가 Event Manager 인 경우에 Event 수정할 수 있는 link를 제공한다.
 
-추가해야함
+![image](https://github.com/dlcksgh1/REST-API/assets/119422058/ca196d9b-7e7e-4f2c-8cce-768b9ae39a87)
+
 
